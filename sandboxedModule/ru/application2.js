@@ -10,12 +10,4 @@ module.exports = function() {
   console.log('From application exported function');
 };
 
-setTimeout(function(){
-	console.log('After 1s')
-},1000);
-
-setInterval(function(){
-	console.log('Each 3s')
-},3000);
-
-qqq.log('eresrtdstdr');
+qqq.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAA');

@@ -5,22 +5,42 @@
 
 // Фреймворк может явно зависеть от библиотек через dependency lookup
 var fs = require('fs'),
-    vm = require('vm');
+    vm = require('vm'),
+	aaa = require('util');
 
+//console.log(process.argv);	
 // Создаем контекст-песочницу, которая станет глобальным контекстом приложения
-var context = { module: {}, console: console };
+var context = { module: {}, console: console ,
+				setTimeout: setTimeout,
+					setInterval: setInterval,
+					qqq: aaa};
 context.global = context;
+
 var sandbox = vm.createContext(context);
 
+myConcloleFunc(){
+	console.log('process.argv[0]')'
+	con
+}
+
 // Читаем исходный код приложения из файла
-var fileName = './application.js';
-fs.readFile(fileName, function(err, src) {
+//var fileName = './application2.js';
+
+var filename = process.argv;
+
+for(var i = 1; i < filename.length; i++){
+
+var tmp = './' + filename[i] + '.js';
+
+fs.readFile(tmp, function(err, src) {
   // Тут нужно обработать ошибки
   
   // Запускаем код приложения в песочнице
-  var script = vm.createScript(src, fileName);
+  var script = vm.createScript(src, tmp);
   script.runInNewContext(sandbox);
   
   // Забираем ссылку из sandbox.module.exports, можем ее исполнить,
   // сохранить в кеш, вывести на экран исходный код приложения и т.д.
 });
+}
+
